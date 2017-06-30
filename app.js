@@ -29,7 +29,6 @@ var bot = new builder.UniversalBot(connector, function (session) {
 });
 server.post('/api/messages', connector.listen());
 
-
 var model = process.env.model;
 var LocationKey = "DefaultLocation";
 var ShippingStyleKey = "Shipping Style";
