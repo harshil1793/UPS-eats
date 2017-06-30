@@ -4,4 +4,3 @@ module.exports= {
     helpMessage: 'Type \'search\' to search by image.  Type \'menu\' to find the restaurants by city and category.',
     appId:'13c7ea20-24a9-4ddd-a8c5-58a0dd3f2a3b',
     appPass:'Smhd4AaGCjX3fT2ZiDuJ0oa'
-}
