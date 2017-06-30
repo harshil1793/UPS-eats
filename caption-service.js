@@ -1,7 +1,7 @@
 var request = require('request').defaults({ encoding: null });
 var prompts = require('./prompts');
 
-var VISION_URL = 'https://api.projectoxford.ai/vision/v1.0/analyze/?visualFeatures=Description&subscription-key='+prompts.visionKey;
+var VISION_URL = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr';
 
 /** 
  *  Gets the caption of the image from an image stream
@@ -14,7 +14,7 @@ exports.getCaptionFromStream = function (stream) {
             var requestData = {
                 url: VISION_URL,
                 encoding: 'binary',
-                headers: { 'content-type': 'application/octet-stream' }
+                headers: { 'content-type': 'application/octet-stream', 'Ocp-Apim-Subscription-Key' : prompts.visionKey }
             };
 
             stream.pipe(request.post(requestData, function (error, response, body) {
@@ -26,7 +26,8 @@ exports.getCaptionFromStream = function (stream) {
                 }
                 else {
                     // resolve(extractCaption(JSON.parse(body)));
-                    resolve(extractTags(JSON.parse(body)));
+                    console.log("url"+body);
+                    resolve(extractRegions(JSON.parse(body)));
                     // console.log("stream"+resolve(extractTags(JSON.parse(body))));
                 }
             }));
@@ -76,11 +77,12 @@ function extractCaption(body) {
     return null;
 }
 
-function extractTags(body) {
-    if (body && body.description && body.description.tags && body.description.tags.length) {
-        console.log(""+body.description.tags[0]);
-        return body.description.tags[0];
-    }
+function extractRegions(body) {
+    // if (body && body.regions[0]) {
+    //     console.log("LINES:   :    :    :    :"+body.regions[0].lines)[0];
+    //     return body.regions.lines;
+    // }
+      console.log("LINES:   :    :    :    :"+body);
 
-    return null;
+    return body;
 }
