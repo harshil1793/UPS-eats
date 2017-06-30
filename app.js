@@ -335,24 +335,4 @@ function handleSuccessResponse(session, body) {
 function handleErrorResponse(session, error) {
     session.send('Oops! Something went wrong. Try again later.');
     console.error(error);
-}
 
-bot.on('conversationUpdate', function (message) {
-    if (message.membersAdded) {
-        message.membersAdded.forEach(function (identity) {
-            if (identity.id === message.address.bot.id) {
-                bot.beginDialog(message.address, 'order_like_more');
-            }
-        });
-    }
-});
-bot.dialog('order_like_more',[
-    function(session){
-        builder.Prompts.text(session,"Would you like to order more ?");
-    },
-    function (session,results){
-        var res = results.response;
-        session.send(res);
-        session.beginDialog('order_like_more');
-    }
-]);
