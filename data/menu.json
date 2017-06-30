@@ -19,10 +19,95 @@
                             "Description" : "(half 370 cal/large 740 cal) For the veggie lover, this soup is loaded with fresh garden vegetables combined with the heartiness of a classic chowder.",
                             "price" : "4.59",
                             "thumb" : "http://cafezupas.com/wp-content/uploads/2015/03/GardenChowder2.jpg.pagespeed.ce.meW1hYcxhr.jpg"
+                        },
+                        {
+                            "item_id" : "125",
+                            "name" : "New England Clam Chowder",
+                            "Description" : "(half 370 cal/large 730 cal) An American classic done right. This soup is rich and creamy, with the right blend of the ingredients you’d expect: clams, potatoes, and East Coast history.",
+                            "price" : "4.59",
+                            "thumb" : "https://theframedtable.com/wp-content/uploads/2013/05/New_England_Clam_Chowder_2.jpg"
+                        },
+                        {
+                            "item_id" : "126",
+                            "name" : "Yucatan Chikcken Tortilla",
+                            "Description" : "(half 110 cal/large 220 cal) Sometimes you need a little zest, and this has it all: chicken, tomatoes, and corn, with a little kick on the side. Just add a squeeze of lime from our drink bar.",
+                            "price" : "4.59",
+                            "thumb" : "http://hungrytravelers.com/wp-content/uploads/2014/11/Sopa-de-lima2.jpg"
+                        },
+                        {
+                            "item_id" : "127",
+                            "name" : "Wild Mushroom Bissque",
+                            "Description" : "(half 250 cal/large 500 cal) Elegant & smooth. This soup highlights the perfect mix of fresh shiitake, crimini, & button mushrooms.",
+                            "price" : "4.59",
+                            "thumb" : "http://assets.epicurious.com/photos/57c5b9ddcf9e9ad43de2d96a/2:1/w_1260%2Ch_630/fresh-wild-mushroom-soup.jpg"
                         }
                     ]
                 },
                 {
+                    "category" : "salads",
+                    "items" : [
+                        {
+                            "item_id" : "133",
+                            "name" : "California Protein Cobb ",
+                            "Description" : "(half 410-480 cal/large 610-720 cal) Choose Buttermilk Ranch or Fresh Herb Vinaigrette, Baby Field Greens, Chicken, Cage-Free Eggs, Applewood Smoked Bacon, Edamame, Grape Tomatoes, Black Olives, Goat Cheese, & Hass Avocado",
+                            "price" : "5.59",
+                            "thumb" : "http://mommymouseclubhouse.com/wp-content/uploads/2017/06/Zupas-Salad-8.jpg"
+                        },
+                        {
+                            "item_id" : "134",
+                            "name" : "Strawberry Harvest Chicken",
+                            "Description" : "(half 390 cal/large 530 cal) House-Chopped Mixed Greens, House-Made Strawberry Champagne Vinaigrette, Chicken*, Strawberries, Fontina Cheese, Gala Apples, Dried Cranberries.",
+                            "price" : "5.59",
+                            "thumb" : "http://cafezupas.com/wp-content/uploads/2015/02/700x450xStrawberryHarvestChicken.jpg.pagespeed.ic.BnBDsL9y66.jpg"
+                        },
+                        {
+                            "item_id" : "135",
+                            "name" : "Garden Chicken Chop",
+                            "Description" : "(half 380-450 cal/large 550-660 cal) Choose Buttermilk Ranch or Fresh Herb Vinaigrette, House-Chopped Mixed Greens, Chicken, Bacon, Sugar Snap Peas, Baby Cucumbers, Grape Tomatoes, Fire-Roasted Corn, Cheddar, & Foccacia Croutons.",
+                            "price" : "5.59",
+                            "thumb" : "http://assets.kraftfoods.com/recipe_images/opendeploy/163623_640x428.jpg"
+                        },
+                        {
+                            "item_id" : "136",
+                            "name" : "Nuts About Berries",
+                            "Description" : "(half 310 cal/large 450 cal) House-Chopped Mixed Greens, House-Made Poppyseed Dressing, Blueberries, Strawberries, Raspberries, Blackberries, & Cinnamon Almonds.",
+                            "price" : "5.59",
+                            "thumb" : "http://cafezupas.com/wp-content/uploads/2015/02/700x450xNutsAboutBerries.jpg.pagespeed.ic.9i_vRFvblg.jpg"
+                        }
+                    ]
+                },
+                {
+                    "category" : "sandwiches",
+                    "items" : [
+                        {
+                            "item_id" : "143",
+                            "name" : "Bbq Pulled Pork",
+                            "Description" : "(Ancient Grain 610 cal/Ciabatta 670 cal) All-Natural Braised Pork Shoulder, Fresh Herb Vinaigrette Cabbage Slaw, Sweet BBQ Sauce, & House-Made Honey Mustard.",
+                            "price" : "6.59",
+                            "thumb" : "http://themoodpost.it/wordpress/wp-content/uploads/2014/09/Fotolia_69856458_Subscription_XXL.jpg"
+                        },
+                        {
+                            "item_id" : "144",
+                            "name" : "Italian Club",
+                            "Description" : "(Ancient Grain 600 cal/Ciabatta 660 cal) Genoa Salami, Turkey, Ham, Banana Peppers, Tomatoes, Alfalfa Sprouts, Baby Cucumbers, Mixed Greens, Muenster Cheese, & House-Made Balsamic Spread.",
+                            "price" : "6.59",
+                            "thumb" : "http://3.bp.blogspot.com/-XS1O_QTJW_w/VfhMsN6EXFI/AAAAAAAApgY/FcG_6gL2DN0/s640/Tim-Hortons-Turkey-Bacon-Club.jpg"
+                        },
+                        {
+                            "item_id" : "145",
+                            "name" : "California Turkey",
+                            "Description" : "(Ancient Grain 580 cal/Ciabatta 640 cal) Turkey, Hass Avocado, Tomatoes, Alfalfa Sprouts, Baby Cucumbers, Mixed Greens, Muenster Cheese, House-Made Buttermilk Ranch, & Roasted Red Pepper Hummus.",
+                            "price" : "6.59",
+                            "thumb" : "http://assets.kraftfoods.com/recipe_images/opendeploy/163623_640x428.jpg"
+                        },
+                        {
+                            "item_id" : "146",
+                            "name" : "VEGETARIAN",
+                            "Description" : "(Ancient Grain 490 cal/Ciabatta 550 cal) Roasted Red Pepper Hummus, Banana Peppers, Roasted Red Peppers, Tomatoes, Baby Cucumbers, Alfalfa Sprouts, Mixed Greens, Muenster Cheese, & Hass Avocado.",
+                            "price" : "6.59",
+                            "thumb" : "http://cafezupas.com/wp-content/uploads/2016/02/Vegetarian.jpg"
+                        }
+                    ]
 
                 }
             ]
