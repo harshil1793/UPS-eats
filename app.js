@@ -1,6 +1,7 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var prompts = require('./prompts');
+var menu = require('./data/menu.json');
 var Client = require('node-rest-client').Client;
 var fs = require('fs');
 var text2png = require('text2png');
@@ -184,12 +185,12 @@ bot.dialog('confirm_id', [
 bot.dialog('save_id', [
     function (session) {
         if(session.userData.location == 'Atlanta'){
-            fs.writeFileSync(session.userData.employee_id+'.png', text2png('Name: '+session.userData.user_name+' \nId: '+session.userData.employee_id+
-        '\nlocation: '+session.userData.location, {textColor: 'black',bgColor: 'white'}));
+            fs.writeFileSync(session.userData.employee_id+'.png', text2png('\n\nName: '+session.userData.user_name+'\nId: '+session.userData.employee_id+
+        '\nlocation: '+session.userData.location+'\n\n', {textColor: 'black',bgColor: 'white'}));
     }
     else{
-        fs.writeFileSync(session.userData.employee_id+'.png', text2png('Name: '+session.userData.user_name+' \nId: '+session.userData.employee_id+
-        '\nlocation: '+session.userData.location+'\nCampus: '+session.userData.campus, {textColor: 'black',bgColor: 'white'}));
+        fs.writeFileSync(session.userData.employee_id+'.png', text2png('\nName: '+session.userData.user_name+' \nId: '+session.userData.employee_id+
+        '\nlocation: '+session.userData.location+'\nCampus: '+session.userData.campus+'\n', {textColor: 'black',bgColor: 'white', padding:'20px', font:'22px'}));
     }
         
     builder.Prompts.text(session, 'Drag and drop image on your pc');
@@ -240,12 +241,12 @@ bot.dialog('upload_id', [
             }
             console.log("query="+session.userData.q);
     }
-    }
-    // function (session, results) {
-    //     session.userData.user_name = results.response;
-    //     builder.Prompts.choice(session, "Select your location ", 'New Jersey|Atlanta',{listStyle:3});
 
-    // }
+    },
+    function (session, results) {
+        
+
+    }
 ]).triggerAction({ matches: /^upload_id/i });
 
 
@@ -259,6 +260,8 @@ bot.dialog('parse_image', function (session) {
     //     for(var j = 0; j < regions.lines.length; j++){
     //          for(var k = 0; k < regions.lines.words.length; k++){
                 // if(regions[i].lines[j].words[k].text == 'Name:'){
+
+        console.log("USERNAME = "+regions[0].lines[0].words[1])
                     session.userData.new_name = regions[0].lines[0].words[1].text;
                     session.userData.new_id = regions[0].lines[1].words[1].text;
                     session.userData.new_location = regions[0].lines[2].words[1].text;
@@ -268,17 +271,126 @@ bot.dialog('parse_image', function (session) {
                     if(regions[0].lines[2].words[1].text != 'Atlanta' ){
                         session.userData.new_campus = regions[0].lines[3].words[1].text;
                     }
+
+                    if(regions[0].lines[2].words[1].text == 'Atlanta' ){
+                        session.userData.new_campus = null;
+                    session.userData.new_location = 'Atlanta';
+                    }
                     
         console.log("USERNAME = "+session.userData.new_name)
         console.log("Id = "+session.userData.new_id)
         console.log("DefaultLocation = "+session.userData.new_location)
         console.log("CAMPUS = "+session.userData.new_campus)
-                // }
-    //         }
-    //     }
-    // }
+
+        session.beginDialog('confirm_image_inf');
     console.log("bbbody::::"+session.userData.body.regions[0].lines[0].words[1].text);
 }).triggerAction({ matches: /^parse_image/i });
+
+//Confirm image information
+bot.dialog('confirm_image_inf', [function (session) {
+        if(session.userData.new_location == 'Atlanta'){
+            session.send('Username: '+session.userData.new_name+' ID: '+session.userData.new_id+
+            ' Location: '+session.userData.new_location);
+        }
+        else{
+            session.send('Username: '+session.userData.new_name+' ID: '+session.userData.new_id+
+            ' Location: '+session.userData.new_location+'Campus: '+session.userData.new_campus);
+        }
+        builder.Prompts.choice(session, "Is the information Correct?", 'Yes|No',{listStyle:3});
+
+},
+function(session,results){
+    switch(results.response.index){
+            case 0:
+                session.beginDialog('category');
+                break;
+            case 1:
+                session.send('Please try to upload image again or type \'create\' to create Id.');
+                session.beginDialog('upload_id');
+                break;
+            default:
+                session.beginDialog('startp');
+                break;
+    }
+}
+]).triggerAction({ matches: /^confirm_image_inf/i });
+
+//Category of restaurants
+bot.dialog('category', [function (session) {
+        builder.Prompts.choice(session, "Choose the category you would like to order", 'Soups|Salads|Sandwiches',{listStyle:3});
+},
+function(session,results){
+    switch(results.response.index){
+            case 0:
+                session.userData.category = 'Soups';
+                session.userData.category_id = '0';
+                session.beginDialog('display_menu');
+                break;
+            case 1:
+                session.userData.category = 'Salads';
+                session.userData.category_id = '1';
+                // session.send('Please try to upload image again or type \'create\' to create Id.');
+                session.beginDialog('display_menu');
+                break;
+            case 2:
+                session.userData.category = 'Sandwiches';
+                session.userData.category_id = '2';
+                session.beginDialog('display_menu');
+                break;
+            default:
+                session.beginDialog('startp');
+                break;
+    }
+}
+]).triggerAction({ matches: /^category/i });
+
+//Menu
+bot.dialog('display_menu', [function (session) {
+       var cat = session.userData.category;
+       var cat_id = session.userData.category_id;
+       console.log('menumenumneu::::::'+cat);
+
+       var msg = new builder.Message(session);
+                                    msg.attachmentLayout(builder.AttachmentLayout.carousel)
+                                    element = [];
+                                    for(var i = 0; i < menu.restaurant.item.length ; i++){
+                                        if(menu.restaurant.item[cat_id].category == cat){
+                                        element.push(new builder.HeroCard(session)
+                                            
+                                            .title(menu.restaurant.item[cat_id].items[i].name)
+                                            .subtitle(menu.restaurant.item[cat_id].items[i].price)
+                                            .text(menu.restaurant.item[cat_id].items[i].description)
+                                            .images([builder.CardImage.create(session, menu.restaurant.item[cat_id].items[i].thumb)])
+                                            .buttons([
+                                                // builder.CardAction.imBack(session, reviews.push(i), "Reviews")
+                                                // builder.CardAction.imBack(session, details=details+"-"+restaurantData[i].restaurant.id, "Details")
+                                            ]))
+                                            console.log(menu.restaurant.item[cat_id].items[i].name+menu.restaurant.item[cat_id].items[i].price
+                                            +menu.restaurant.item[cat_id].items[i].description+menu.restaurant.item[cat_id].items[i].thumb);
+                                        }
+                                    }
+                                    msg.attachments(element);
+                                    session.send(msg);
+},
+function(session,results){
+    switch(results.response.index){
+            case 0:
+                session.beginDialog('category');
+                break;
+            case 1:
+                session.send('Please try to upload image again or type \'create\' to create Id.');
+                session.beginDialog('upload_id');
+                break;
+            case 2:
+                session.send('Please try to upload image again or type \'create\' to create Id.');
+                session.beginDialog('upload_id');
+                break;
+            default:
+                session.beginDialog('startp');
+                break;
+    }
+}
+]).triggerAction({ matches: /^display_menu/i });
 
 
 

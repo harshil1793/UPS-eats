@@ -26,7 +26,7 @@ exports.getCaptionFromStream = function (stream) {
                 }
                 else {
                     // resolve(extractCaption(JSON.parse(body)));
-                    // console.log("url"+body);
+                    console.log("url"+body);
                     resolve(extractRegions(JSON.parse(body)));
                     // console.log("stream"+resolve(extractTags(JSON.parse(body))));
                 }
