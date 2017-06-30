@@ -20,16 +20,15 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
   
 // Create chat bot
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
-    // appId: prompts.appId,
-    // appPassword: prompts.appPass
+//     appId: process.env.MICROSOFT_APP_ID,
+//     appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: prompts.appId,
+    appPassword: prompts.appPass
 });
 var bot = new builder.UniversalBot(connector, function (session) {
     session.beginDialog('startp');
 });
 server.post('/api/messages', connector.listen());
-
 
 var model = process.env.model;
 var LocationKey = "DefaultLocation";
@@ -447,4 +446,5 @@ function handleSuccessResponse(session, body) {
 function handleErrorResponse(session, error) {
     session.send('Oops! Something went wrong. Try again later.');
     console.error(error);
-}
+
+};
